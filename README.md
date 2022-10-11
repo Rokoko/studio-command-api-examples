@@ -101,3 +101,4 @@ Parameters:
  When you release the mouse button but keep your mouse in the canvas area, the tracker command continue working in the query mode
  and you will see a yellow trajectory of the actor moving along the ground plane.
 
+![Web Page Drift Control Test](Images/drift_control_web_page.jpg)
