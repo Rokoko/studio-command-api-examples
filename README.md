@@ -87,3 +87,17 @@ Parameters:
 {'X': <value>, 'Y': <value>, 'Z': <value>, 'W': <value>}
 * timeout: Time in seconds until the attached tracker releases the attached object (optional)
 * is_query_only: Use the command to only query a specified bone position and orientation rather than attaching the actual tracker and take control of the bone (optional)
+
+## Python Examples
+
+ In order to run python examples you have to use Python 3.3+ interpreter and you have to install **requests** library - https://pypi.org/project/requests/
+
+## Web Page Example
+
+ This is an example of a drift control for the actor. The example is a html web page with java script code.
+ The grid on a page shows the ground plane, while a ball represents an actor. 
+ 
+ When you click on a canvas and hold the mouse button, you take control over the actor by sending tracker commands
+ When you release the mouse button but keep your mouse in the canvas area, the tracker command continue working in the query mode
+ and you will see a yellow trajectory of the actor moving along the ground plane.
+
