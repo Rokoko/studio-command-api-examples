@@ -5,6 +5,19 @@
   
  </head>
  <body">
+ 	 <label for="calibPoses">Choose a calibration pose:</label>
+
+	<select name="Calibration Poses" id="calibPoses">
+	  <option value="default">Default</option>
+	  <option value="tpose">TPose</option>
+	  <option value="straight-arms-down">Straight Arms Down</option>
+	  <option value="straight-arms-forward">Straight Arms Forward</option>
+	</select>
+	<button onclick="calibrate()"> Run A Calibrate Command </button> 
+	<br>
+	<br>
+	<label for="canvas">Drift correction Test:</label>	
+	<br>
    <canvas id="canvas" style="border: 1px solid" width="600" height="300"></canvas>
    <script type="application/javascript">
     var canvas = document.getElementById('canvas');
@@ -89,6 +102,56 @@
 	    if (response.status === 200) {
 	    	responseData = await response.text();
 	    }
+	}
+
+	function calibrate() {
+
+		let useCustomPose = false;
+		let pose = '';
+
+		var calibPoses = document.getElementById('calibPoses');
+    if (calibPoses.selectedIndex >= 0) {
+        
+        let poseName = calibPoses.value;
+        
+        if (poseName != "default")
+				{
+					useCustomPose = true;
+					pose = poseName;
+				}
+    }
+    
+    let msgBody = JSON.stringify({
+		        deviceID: "",
+		        countdownDelay: -1,
+		        skipSuit: false,
+		        skipGloves: false,
+		        use_custom_pose: useCustomPose,
+		        //pose: pose
+        });
+    if (useCustomPose)
+    {
+    	msgBody = JSON.stringify({
+		        deviceID: "",
+		        countdownDelay: -1,
+		        skipSuit: false,
+		        skipGloves: false,
+		        use_custom_pose: useCustomPose,
+		        pose: pose
+        });
+    }
+    console.log(msgBody);
+
+		let response = fetch("http://127.0.0.1:14053/v2/1234/calibrate", {
+		    method:"POST",
+		    mode: "cors",
+	    	cache: "no-cache",
+		    body: msgBody
+		});
+
+    if (response.status === 200) {
+    	responseData = response.text();
+    }	
 	}
 
 	function draw() {
