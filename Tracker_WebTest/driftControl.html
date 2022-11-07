@@ -5,22 +5,25 @@
   
  </head>
  <body">
- 	 <label for="calibPoses">Choose a calibration pose:</label>
-
-	<select name="Calibration Poses" id="calibPoses">
-	  <option value="default">Default</option>
-	  <option value="tpose">TPose</option>
-	  <option value="straight-arms-down">Straight Arms Down</option>
-	  <option value="straight-arms-forward">Straight Arms Forward</option>
-	</select>
-	<button onclick="calibrate()"> Run A Calibrate Command </button> 
-	<br>
-	<br>
-	<label for="canvas">Drift correction Test:</label>	
-	<br>
+ 		<label for="deviceID">Define a device ID:</label>
+ 		<input type="text" id="deviceID" name="">
+ 		<br>
+	 	<label for="calibPoses">Choose a calibration pose:</label>
+		<select name="Calibration Poses" id="calibPoses">
+		  <option value="default">Default</option>
+		  <option value="tpose">TPose</option>
+		  <option value="straight-arms-down">Straight Arms Down</option>
+		  <option value="straight-arms-forward">Straight Arms Forward</option>
+		</select>
+		<button onclick="calibrate()"> Run A Calibrate Command </button> 
+		<br>
+		<br>
+		<label for="canvas">Drift correction Test:</label>	
+		<br>
    <canvas id="canvas" style="border: 1px solid" width="600" height="300"></canvas>
    <script type="application/javascript">
     var canvas = document.getElementById('canvas');
+    var deviceID = document.getElementById('deviceID');
 	var ctx = canvas.getContext('2d');
 	var raf;
 	var running = false;
@@ -87,7 +90,7 @@
 		    mode: "cors",
 	    	cache: "no-cache",
 		    body: JSON.stringify({
-		        deviceID: "",
+		        deviceID: deviceID.value,
 		        boneAttached: "HIPS",
 		        position: {X: 0.01 * (ball.x - canvas.width / 2), Y: 1.0, Z: 0.01 * (canvas.height - ball.y - canvas.height / 2)},
 		        rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0},
@@ -122,7 +125,7 @@
     }
     
     let msgBody = JSON.stringify({
-		        deviceID: "",
+		        deviceID: deviceID.value,
 		        countdownDelay: -1,
 		        skipSuit: false,
 		        skipGloves: false,
@@ -179,7 +182,8 @@
 	  {
 	    clear();
 	    ball.x = e.clientX;
-	    ball.y = e.clientY;
+	    var bodyRect = canvas.getBoundingClientRect();
+	    ball.y = e.clientY - bodyRect.top;
 	    ball.draw();
 	  }
 	});
