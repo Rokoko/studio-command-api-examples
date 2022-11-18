@@ -8,6 +8,9 @@
  		<label for="deviceID">Define a device ID:</label>
  		<input type="text" id="deviceID" name="">
  		<br>
+ 		<label for="interference_compensation_check">Experimental interference compensation:</label>
+ 		<input type="checkbox" id="interference_compensation_check" name="">
+ 		<br>
 	 	<label for="calibPoses">Choose a calibration pose:</label>
 		<select name="Calibration Poses" id="calibPoses">
 		  <option value="default">Default</option>
@@ -130,6 +133,7 @@
 		        skipSuit: false,
 		        skipGloves: false,
 		        use_custom_pose: useCustomPose,
+				interference_compensation: interference_compensation_check.checked, 
 		        //pose: pose
         });
     if (useCustomPose)
@@ -140,6 +144,7 @@
 		        skipSuit: false,
 		        skipGloves: false,
 		        use_custom_pose: useCustomPose,
+				interference_compensation: interference_compensation_check.checked, 
 		        pose: pose
         });
     }
