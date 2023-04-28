@@ -1,7 +1,7 @@
 # Studio Command API Examples
 Example code of interfacing with the Rokoko Studio Command API
 
-Rokoko Studio Beta offers an API that allows you to operate a running application through a range of commands.
+Rokoko Studio offers an API that allows you to operate a running application through a range of commands.
 
 At the moment, the following commands are available - for any of them to work, you need to have a scene open:
 
