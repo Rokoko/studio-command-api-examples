@@ -104,3 +104,48 @@ is_query_only | Use the command to only query a specified bone position and orie
  and you will see a yellow trajectory of the actor moving along the ground plane.
 
 ![Web Page Drift Control Test](Images/drift_control_web_page.jpg)
+ 
+## Trigger Messages
+ 
+Two-way UDP communication can be used to trigger the start or stop of recording from an external source, or to send recording notifications from the Studio.
+ 
+### Message Format
+
+There are 2 possible notifications to send or receive - start and stop recording.
+
+Notification has a xml based format
+
+Start recording message
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<CaptureStart>
+    <Name VALUE="RemoteTriggerTest_take01"/>
+    <TimeCode VALUE="00:00:00:00"/>
+    <PacketID VALUE="0"/>
+    <ProcessID VALUE="optional process id" />
+</CaptureStart>
+```
+
+Stop recording message
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<CaptureStop>
+    <Name VALUE="TakeName" />
+    <TimeCode VALUE="00:00:00:00" />
+		<SetActiveClip VALUE="False"/>
+    <ProcessID VALUE="optional process id" />
+</CaptureStop>
+```
+
+The following parameters are used:
+
+- **Name** - Specifies the name of the new clip.
+- **TimeCode** - In SMPTE format, this parameter provides values that can be used to align the start recording clip time and stop recording value for the entire clip. This includes the start time offset and duration. Use "00:00:00:00" to indicate that timecode will not be used.
+- **SetActiveClip** - Determines whether to enter isolation mode (clip editing mode) or continue in live mode.
+- **ProcessID** - Used to verify the owner of the package to avoid reacting to self-broadcasted packages.
+ 
+### Test Python Scripts
+
+Test Python scripts to communicate with trigger messages can be found in TriggerMessages folder.
