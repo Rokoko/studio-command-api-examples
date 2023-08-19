@@ -1,7 +1,7 @@
 
 # StartRecordingExample.py
 # Collection of Command API examples
-# Rokoko (c) 2022
+# Rokoko (c) 2022-2023
 
 import requests
 
@@ -12,10 +12,11 @@ CLIP_NAME = 'MyNewClip' # Clip Name, Optional
 TIME_CODE = '00:01:05:00'
 FRAME_RATE = '30'
 BACK_TO_LIVE = False # should we enter isolation mode after recording or continue in live mode
+COMMAND_NAME = 'recording/start'
 
 responce = None
 try:
-  responce = requests.post(f"http://{IP_ADDRESS}:{PORT}/v1/{API_KEY}/recording/start",
+  responce = requests.post(f"http://{IP_ADDRESS}:{PORT}/v1/{API_KEY}/{COMMAND_NAME}",
     json = {
       'filename': CLIP_NAME,
       'time' : TIME_CODE,
