@@ -10,6 +10,9 @@ At the moment, the following commands are available - for any of them to work, y
 * Reset actor
 * Get scene info
 * Attach tracker
+* Control playback
+* Toggle live streaming
+* Request an actor or character skeleton
 
 ## Setup and sending commands
 In order to send commands to and receive messages from Studio, the following values will need to be defined:
@@ -66,6 +69,36 @@ Parameter | Description
 --- | ---
 device_id | The name/id of the input device, e.g. a Smartsuit Pro, that is attached to the actor you want to reset
 
+### Toggle Live Stream
+Take control of enabled / disabled state of a live stream
+
+Command: **livestream**
+
+Parameter | Description
+--- | ---
+enabled | pass the true/false value in order to activate or deactivate currently configurated live stream
+
+### Playback
+Take control of several properties of playback based on a given control flag
+
+Command: **playback**
+
+Parameter | Description
+--- | ---
+is_playing | control the play/pause state, only if IsPlaying flag value is provided
+current_time | define the current time in seconds, only if CurrentTime flag value is provided
+playback_speed | define a playback speed, only if PlaybackSpeed flag value is provided
+change_flag | set a bitwise flags to define what changes you want to make over the playback
+
+And playback flags could be following
+Parameter | Value | Description
+--- | --- | ---
+IsPlaying | 1 | control the play/pause state, make a use of is_playing input value
+CurrentTime | 2 | make a use of current_time
+GoToFirstFrame | 4 | rewind playback to the first frame
+GoToLastFrame | 8 | rewind playback to the last frame
+PlaybackSpeed | 16 | make a use of playback_speed
+
 ### Scene Info
 Returns information about the current open scene
 
@@ -75,6 +108,8 @@ Parameter | Description
 --- | ---
 devices_info | Set to true if you want information about live input devices in the scene
 clips_info | Set to true if you want information about the recorded clips in the scene
+actors_info | Set to true if you want information about all actor names in the scene
+characters_info | Set to true if you want information about all character names in the scene
 
 ### Attach Tracker
 Attaches an external tracker, e.g. a HTC Vive Tracker, to an actor, which can then determine its global position.
@@ -94,7 +129,7 @@ is_query_only | Use the command to only query a specified bone position and orie
 
  In order to run python examples you have to use Python 3.3+ interpreter and you have to install **requests** library - https://pypi.org/project/requests/
 
-## Web Page Example
+## Web Page Drift Control Example
 
  This is an example of a drift control for the actor. The example is a html web page with java script code.
  The grid on a page shows the ground plane, while a ball represents an actor. 
@@ -104,7 +139,13 @@ is_query_only | Use the command to only query a specified bone position and orie
  and you will see a yellow trajectory of the actor moving along the ground plane.
 
 ![Web Page Drift Control Test](Images/drift_control_web_page.jpg)
- 
+
+## Web Page Pose Example
+
+ This is a test scene in playCanvas with ue5 mannequin. You have to have a Studio scene running with the same character with a name "ue5_many" being imported and paired to newton. In the example a pose command is used in order to request skeleton definition with a list of bone names and hierarchy and with a request of motion frames to translate and rotate joints the same way how it looks in the Studio scene. 
+
+[PlayCanvas Project](https://playcanvas.com/project/1037633/overview/rokoko-experimental)
+
 ## Trigger Messages
  
 Two-way UDP communication can be used to trigger the start or stop of recording from an external source, or to send recording notifications from the Studio.
