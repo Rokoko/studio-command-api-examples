@@ -21,6 +21,6 @@ try:
   )
 except Exception as e:
   print (e)
-
-if response is not None:
-  print(response.json())
+finally:
+  if response is not None:
+    print(response.json())

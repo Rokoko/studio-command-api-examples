@@ -4,9 +4,9 @@
 # Rokoko (c) 2022-2023
 
 import requests
-from flags import Flags
+from enum import IntFlag
 
-class CommandAPIPlaybackChange(Flags):
+class CommandAPIPlaybackChange(IntFlag):
     Unknown = 0
     IsPlaying = 1
     CurrentTime = 2

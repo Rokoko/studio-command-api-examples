@@ -17,11 +17,11 @@ try:
       'devices_info': True, # return a list of all live devices in the scene
       'clips_info': False, # return a list of all recorded clips in the scene
       'actors_info' : False, # return a list of all actors
-      'characters_info' : False # return a list of all character
+      'characters_info' : True # return a list of all character
     }
   )
 except Exception as e:
   print (e)
-
-if response is not None:
-  print(response.json())
+finally:
+  if response is not None:
+    print(response.json())
