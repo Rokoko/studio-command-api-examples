@@ -28,8 +28,8 @@ for example
 
 http://127.0.0.1:14053/v1/1234/recording/start
 
-## Commands
-### Start/Stop Recording
+# Commands
+## Start/Stop Recording
 Used to start and stop a recording
 
 Command: **recording/start** or **recording/stop**
@@ -41,7 +41,7 @@ time | Timecode in SMPTE format "hh:mm:ss:ff". when it comes to start recording,
 frame_rate | Defined framerate for the clip you want to record (optional)
 back_to_live | Set to true if you want to stay in "live view" after ending a recording (optional)
  
-### Calibrate
+## Calibrate
 Calibrates all paired live input devices in the scene or for the specified actor
 
 Command: **calibrate**
@@ -60,7 +60,7 @@ Values for the pose argument could be the following:
 * straight-arms-forward
 * tpose (default one)
 
-### Reset Actor
+## Reset Actor
 Resets the actor pose and local position
 
 Command: **resetactor**
@@ -69,7 +69,7 @@ Parameter | Description
 --- | ---
 device_id | The name/id of the input device, e.g. a Smartsuit Pro, that is attached to the actor you want to reset
 
-### Toggle Live Stream
+## Toggle Live Stream
 Take control of enabled / disabled state of a live stream
 
 Command: **livestream**
@@ -78,7 +78,7 @@ Parameter | Description
 --- | ---
 enabled | pass the true/false value in order to activate or deactivate currently configurated live stream
 
-### Playback
+## Playback
 Take control of several properties of playback based on a given control flag
 
 Command: **playback**
@@ -99,7 +99,7 @@ GoToFirstFrame | 4 | rewind playback to the first frame
 GoToLastFrame | 8 | rewind playback to the last frame
 PlaybackSpeed | 16 | make a use of playback_speed
 
-### Scene Info
+## Scene Info
 Returns information about the current open scene
 
 Command: **info**
@@ -111,7 +111,7 @@ clips_info | Set to true if you want information about the recorded clips in the
 actors_info | Set to true if you want information about all actor names in the scene
 characters_info | Set to true if you want information about all character names in the scene
 
-### Attach Tracker
+## Attach Tracker
 Attaches an external tracker, e.g. a HTC Vive Tracker, to an actor, which can then determine its global position.
 
 Command: **tracker**
@@ -124,6 +124,27 @@ position | Position of the tracker being attached {'X': <value>, 'Y': <value>, '
 rotation | Rotation of the tracker being attached {'X': <value>, 'Y': <value>, 'Z': <value>, 'W': <value>}
 timeout | Time in seconds until the attached tracker releases the attached object (optional)
 is_query_only | Use the command to only query a specified bone position and orientation rather than attaching the actual tracker and take control of the bone (optional)
+
+## Skeleton Pose
+Do a request to retrieve skeleton hierarchy names and relations, reference pose and motion frame transforms
+
+Command: **pose**
+
+Parameter | Description
+--- | ---
+name | The name of an actor or a character in the scene
+mode | request a 'definition', 'reference' or 'motion'
+space | an option for motion frame to define in what space you want to retreive transforms 'local', 'global' or 'localref'
+
+The mode option has values
+* definition - in that case, the response will contain bones names and parent relations
+* reference - the response will contain position and rotation of each bone in reference pose
+* motion - the response will contain hips position and other joint rotations in a defined space provided by a correspondent option
+
+The space option has values:
+* local - is return values in joint local space
+* global - the response will contain joint transforms in global (world) space
+* localref - joint transforms in local space subtracted from a reference pose 
 
 ## Python Examples
 
