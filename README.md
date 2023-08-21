@@ -166,6 +166,7 @@ The space option has values:
  This is a test scene in playCanvas with ue5 mannequin. You have to have a Studio scene running with the same character with a name "ue5_many" being imported and paired to newton. In the example a pose command is used in order to request skeleton definition with a list of bone names and hierarchy and with a request of motion frames to translate and rotate joints the same way how it looks in the Studio scene. 
 
 [PlayCanvas Project](https://playcanvas.com/project/1037633/overview/rokoko-experimental)
+![PlayCanvas Test](Images/play_canvas_test.jpg)
 
 ## Trigger Messages
  
