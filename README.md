@@ -70,7 +70,7 @@ Parameter | Description
 device_id | The name/id of the input device, e.g. a Smartsuit Pro, that is attached to the actor you want to reset
 
 ## Toggle Livestreaming
-Take control of enabled / disabled state of a live stream
+Toggle the livestreaming on/off in Studio, based on Studio-defined settings
 
 Command: **livestream**
 
