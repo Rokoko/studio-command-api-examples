@@ -76,7 +76,7 @@ Command: **livestream**
 
 Parameter | Description
 --- | ---
-enabled | pass the true/false value in order to activate or deactivate currently configurated live stream
+enabled | pass the true/false value in order to toggle the currently configured livestream on/off
 
 ## Playback
 Take control of several properties of playback based on a given control flag
