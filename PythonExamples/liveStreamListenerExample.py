@@ -8,8 +8,10 @@ import time
 import json
 import csv
 
+# configuration
 HOST, PORT = '', 14043
-SAVE_TO_FILE = True
+UNPACK_PACKET = False
+SAVE_TO_FILE = False
 
 def WriteUnpackedToFile(data):
     if SAVE_TO_FILE:
@@ -49,14 +51,16 @@ packet_counter = 0
 print ("Start listener at port {}".format(PORT))
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind((HOST, PORT))
-s.setblocking(0)
+s.setblocking(1)
 
 while True:
     try:
-        data, address = s.recvfrom(20000)
-        Unpack(data)
+        data, address = s.recvfrom(40000)
+        if UNPACK_PACKET:
+            Unpack(data)
 
-    except socket.error:
+    except socket.error as e:
+        print (e)
         pass
     else:
         packet_time = time.time()
