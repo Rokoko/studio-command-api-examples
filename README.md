@@ -134,7 +134,7 @@ Parameter | Description
 --- | ---
 name | The name of an actor or a character in the scene
 mode | request a 'definition', 'reference' or 'motion'
-space | an option for motion frame to define in what space you want to retreive transforms 'local', 'global' or 'localref'
+space | an option for motion frame to define in what space you want to retreive transforms 'local', 'world' or 'localref'
 
 The mode option has values
 * definition - in that case, the response will contain bones names and parent relations
@@ -143,7 +143,7 @@ The mode option has values
 
 The space option has values:
 * local - is return values in joint local space
-* global - the response will contain joint transforms in global (world) space
+* world - the response will contain joint transforms in global (world) space
 * localref - joint transforms in local space subtracted from a reference pose 
 
 ## Python Examples
